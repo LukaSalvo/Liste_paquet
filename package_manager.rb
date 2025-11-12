@@ -6,7 +6,7 @@ def package_manager
   elsif system("command -v brew > /dev/null 2>&1")
     :brew
   else
-    puts "❌ Aucun gestionnaire de paquets trouvé (dnf ou brew)."
+    puts " Aucun gestionnaire de paquets trouvé (dnf ou brew)."
     exit 1
   end
 end
@@ -44,11 +44,11 @@ manager = package_manager
 packages = list_packages(manager)
 
 if packages.empty?
-  puts "⚠️ Aucun paquet n’a été trouvé."
+  puts " Aucun paquet n’a été trouvé."
   exit
 end
 
-puts "💡 Tape le début du nom d’un paquet :"
+puts " Tape le début du nom d’un paquet :"
 print "> "
 query = gets.strip.downcase
 
@@ -59,7 +59,7 @@ if matches.empty?
   exit
 end
 
-puts "\n📦 Paquets trouvés :"
+puts "\n Paquets trouvés :"
 matches.first(20).each_with_index { |p, i| puts "#{i + 1}. #{p}" }
 puts "(affichage limité à 20 résultats)\n\n" if matches.size > 20
 
@@ -73,17 +73,17 @@ unless pkg
 end
 
 puts "\nQue veux-tu faire avec '#{pkg}' ?"
-puts "1. 🔄 Mettre à jour"
-puts "2. 🗑 Supprimer"
+puts "1.  Mettre à jour"
+puts "2.  Supprimer"
 print "> "
 action = gets.to_i
 
 case action
 when 1
-  puts "\n🔄 Mise à jour de #{pkg}..."
+  puts "\n Mise à jour de #{pkg}..."
   update_package(manager, pkg)
 when 2
-  puts "\n🗑 Suppression de #{pkg}..."
+  puts "\n Suppression de #{pkg}..."
   remove_package(manager, pkg)
 else
   puts "Action inconnue."
